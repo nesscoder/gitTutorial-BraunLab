@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+        <meta name="author" content="Created by Chunni Ji, Ziyu Zhao, and Elan Ness-Cohn" />
+    
+        <meta name="date" content="2021-12-17" />
+    
+    <title>Braun Group git Tutorial</title>
+
+        <script src="gitTutorial_files/header-attrs-2.10/header-attrs.js"></script>
+        <script src="gitTutorial_files/jquery-1.11.3/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="gitTutorial_files/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="gitTutorial_files/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+        <script src="gitTutorial_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+        <script src="gitTutorial_files/navigation-1.1/tabsets.js"></script>
+        <link href="gitTutorial_files/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+        <script src="gitTutorial_files/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+        <link href="gitTutorial_files/readthedown-0.1/readthedown.css" rel="stylesheet" />
+        <link href="gitTutorial_files/readthedown-0.1/readthedown_fonts_embed.css" rel="stylesheet" />
+        <script src="gitTutorial_files/readthedown-0.1/readthedown.js"></script>
+        <link href="gitTutorial_files/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
+    
+    
+        <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+          background-color: #ffffff;
+          color: #a0a0a0;
+        }
+      pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+      div.sourceCode
+        { color: #1f1c1b; background-color: #ffffff; }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span { color: #1f1c1b; } /* Normal */
+      code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+      code span.an { color: #ca60ca; } /* Annotation */
+      code span.at { color: #0057ae; } /* Attribute */
+      code span.bn { color: #b08000; } /* BaseN */
+      code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+      code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+      code span.ch { color: #924c9d; } /* Char */
+      code span.cn { color: #aa5500; } /* Constant */
+      code span.co { color: #898887; } /* Comment */
+      code span.cv { color: #0095ff; } /* CommentVar */
+      code span.do { color: #607880; } /* Documentation */
+      code span.dt { color: #0057ae; } /* DataType */
+      code span.dv { color: #b08000; } /* DecVal */
+      code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+      code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+      code span.fl { color: #b08000; } /* Float */
+      code span.fu { color: #644a9b; } /* Function */
+      code span.im { color: #ff5500; } /* Import */
+      code span.in { color: #b08000; } /* Information */
+      code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+      code span.op { color: #1f1c1b; } /* Operator */
+      code span.ot { color: #006e28; } /* Other */
+      code span.pp { color: #006e28; } /* Preprocessor */
+      code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+      code span.sc { color: #3daee9; } /* SpecialChar */
+      code span.ss { color: #ff5500; } /* SpecialString */
+      code span.st { color: #bf0303; } /* String */
+      code span.va { color: #0057ae; } /* Variable */
+      code span.vs { color: #bf0303; } /* VerbatimString */
+      code span.wa { color: #bf0303; } /* Warning */
+    </style>
+    
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
+
+    <!-- code folding -->
+    
+    <!-- code download -->
+    
+    <!-- tabsets dropdown -->
+
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
+
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
+
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
+
+<body class="preload">
+
+   	
+         <!-- readthedown start -->   
+   <div id="content" data-toggle="wy-nav-shift">
+     <nav id="nav-top" role="navigation" aria-label="top navigation">
+       <a role="button" href="#" data-toggle="wy-nav-top"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+     </nav>
+         
+   
+        
+      <h1 class="title">Braun Group <code>git</code> Tutorial</h1>
+         <h1 class="subtitle">Let’s <code>Git</code> Started</h1>
+   
+         <!-- readthedown authors -->
+   <div id="sidebar">
+    <h2><a href="#content">Braun Group <code>git</code> Tutorial</a></h2>
+    <div id="toc">
+      <ul>
+      <li><a href="#pre-tutorial-work">Pre-tutorial Work</a>
+      <ul>
+      <li><a href="#introduction-to-git">Introduction to <code>git</code></a></li>
+      <li><a href="#video">Video Lecture</a></li>
+      <li><a href="#bbaccount">Create a Bitbucket account</a></li>
+      <li><a href="#configure-git">Configure <code id="config">git</code></a>
+      <ul>
+      <li><a href="#setup-git-slog">setup <code>git slog</code></a></li>
+      </ul></li>
+      </ul></li>
+      <li><a href="#part1">Part 1: <code>git</code> Command Line Basics</a>
+      <ul>
+      <li><a href="#initializing-your-git-repo">Initializing your <code>git</code> repo</a>
+      <ul>
+      <li><a href="#git-init"><code>git init</code></a></li>
+      </ul></li>
+      <li><a href="#independent-workflow">Independent Workflow</a>
+      <ul>
+      <li><a href="#git-add"><code>git add</code></a></li>
+      <li><a href="#git-commit"><code>git commit</code></a></li>
+      <li><a href="#git-log"><code>git log</code></a></li>
+      <li><a href="#git-remote"><code>git remote</code></a></li>
+      <li><a href="#git-push"><code>git push</code></a></li>
+      </ul></li>
+      <li><a href="#collaborative-workflow-exploratory-independent-workflow">Collaborative Workflow / Exploratory Independent Workflow</a>
+      <ul>
+      <li><a href="#clone"><code>git clone</code></a></li>
+      <li><a href="#git-branch"><code>git branch</code></a></li>
+      <li><a href="#git-checkout"><code>git checkout</code></a></li>
+      <li><a href="#git-merge"><code>git merge</code></a></li>
+      <li><a href="#git-fetch"><code>git fetch</code></a></li>
+      <li><a href="#git-pull"><code>git pull</code></a></li>
+      <li><a href="#dealing-with-merge-conflicts">Dealing With Merge Conflicts</a></li>
+      </ul></li>
+      <li><a href="#helpful-tips-and-tricks">Helpful Tips and Tricks</a>
+      <ul>
+      <li><a href="#gitignore">.gitignore</a></li>
+      </ul></li>
+      </ul></li>
+      <li><a href="#part-2-microsoft-visual-studio-code-gui-demonstration">Part 2: Microsoft Visual Studio Code GUI Demonstration</a>
+      <ul>
+      <li><a href="#installation-of-microsoft-vscode-and-bitbucket-extension">Installation of Microsoft VScode and Bitbucket Extension</a></li>
+      <li><a href="#get-started-with-vscode">Get Started With VScode</a></li>
+      <li><a href="#visualization-of-your-repo">Visualization of Your Repo</a></li>
+      <li><a href="#source-control">Source Control</a>
+      <ul>
+      <li><a href="#commit-changes"><code>Commit Changes</code></a></li>
+      <li><a href="#manage-branches"><code>Manage Branches</code></a></li>
+      <li><a href="#interact-with-remote"><code>Interact with Remote</code></a></li>
+      </ul></li>
+      <li><a href="#other-version-control-extensions-in-vscode">Other Version Control Extensions in VScode</a></li>
+      </ul></li>
+      <li><a href="#additional-links-and-sources">Additional Links and Sources</a></li>
+      </ul>
+    </div>
+    <div id="postamble" data-toggle="wy-nav-shift" class="status">
+                  <p class="author"><span class="glyphicon glyphicon-user"></span> Created by Chunni Ji, Ziyu Zhao, and Elan Ness-Cohn</p>
+                        <p class="date"><span class="glyphicon glyphicon-calendar"></span> 12/17/2021</p>
+          </div>
+   </div>
+     
+
+   
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<div id="main">
+<hr />
+<div id="pre-tutorial-work" class="section level1">
+<h1>Pre-tutorial Work</h1>
+<hr />
+<div id="introduction-to-git" class="section level3">
+<h3>Introduction to <code>git</code></h3>
+<p>As you may know already, the Braun group uses <code>git</code> for version control, sharing of work, and as a digital “lab notebook”. Using <code>git</code> is a group requirement! Aside from learning a marketable skill, mastering <code>git</code> will make your time in grad school a heck-of-a-lot easier. By putting in the effort now, your future self will thank you for having well documented code to refresh your memory on a project you were working on months/years previously. Additionally, you will save yourself from agonizing heartache, if something was to happen to your local computer, since you will always have a remote backup to your work! As such, the expectation is to commit your work into a <code>git</code> repository locally on your computer, and push those commits to the server on a regular basis.</p>
+<p>If you are not already familiar with <code>git</code>, no worries! This is exactly what this tutorial is here to teach you!</p>
+<hr />
+<p>Pre-tutorial checklist</p>
+<ul>
+<li>Watch the <a href="#video"><code>git</code> lecture</a></li>
+<li>Set up your <a href="#bbaccount">Bitbucket account</a></li>
+<li><a href="#config">Configure <code>git</code></a> on your local machine</li>
+</ul>
+<hr />
+<p>Below is a complete list of the most common base commands available to you in <code>git</code> and cheat sheet for your reference. By the end of the tutorial you should have a grasp of how these commands work and be ready to use <code>git</code> for all your research version control needs!</p>
+<p><strong>Basic <code>git</code> Commands</strong></p>
+<ul>
+<li><code>git init</code> - create a local <code>.git</code> repository</li>
+<li><code>git status</code> - checks which branch you are on and if you have any unsaved changes</li>
+<li><code>git add</code> - add local files to be staged for remote</li>
+<li><code>git commit</code> - stage/commit local changes</li>
+<li><code>git log</code> - shows log of previous commits on current branch</li>
+<li><code>git push</code> - push local commits to remote</li>
+<li><code>git clone</code> - clone remote repository</li>
+<li><code>git branch</code> - list all available branches</li>
+<li><code>git checkout</code> - move to new branch</li>
+<li><code>git merge</code> - merge branches together</li>
+<li><code>git fetch</code> - fetches most recent version from remote without merging</li>
+<li><code>git pull</code> - pull most recent version from remote and attempts merge</li>
+</ul>
+<div class="figure" style="text-align: center">
+<img src="figs/overview.png" alt="**`git` Cheat Sheet for Quick Reference**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong><code>git</code> Cheat Sheet for Quick Reference</strong>
+</p>
+</div>
+<hr />
+</div>
+<div id="video" class="section level3">
+<h3>Video Lecture</h3>
+<hr />
+<p>Before continuing with this tutorial, please watch the video lecture below to familiarize yourself with the inner workings of <code>git</code>. After reviewing the lecture, we’ll get some hands on experience using <code>git</code> in <a href="#part1">Part 1</a> of the tutorial.</p>
+<div class="vembedr embed-responsive embed-responsive-16by9">
+<div>
+<iframe src="https://www.youtube.com/embed/2sjqTHE0zok" width="533" height="300" frameborder="0" allowfullscreen="" class="embed-responsive-item"></iframe>
+</div>
+</div>
+<hr />
+</div>
+<div id="bbaccount" class="section level3">
+<h3>Create a Bitbucket account</h3>
+<hr />
+<p>The Braun Group has two main remote repositories:</p>
+<ul>
+<li><p>The internally-hosted <code>git</code> server (i.e. biocomplexity <code>&lt;Netid&gt;@biocomplexity.northwestern.edu</code>) – housed in Rosemary’s office.</p></li>
+<li><p>The cloud-based repository (i.e. <a href="https://bitbucket.org/biocomplexity/">Bitbucket/biocomplexity</a>) – housed on Bitbucket’s server.</p></li>
+</ul>
+<p>Bitbucket has less space than the lab server, but it’s much easier to access! For rotation and masters students, that gives the important advantage of getting you up and running quickly! When your project evolves into something longer term or more complex than what Bitbucket can handle, we’ll shift you to the lab server.</p>
+<p>You should all have received an invitation to join the “biocomplexity” team on Bitbucket. Please accept the invitation and set up an account if necessary. If you already have a Bitbucket account under another email address, let Rosemary know – <a href="mailto:rbraun@northwester.edu">rbraun@northwester.edu</a>.</p>
+<hr />
+</div>
+<div id="configure-git" class="section level3">
+<h3>Configure <code id="config">git</code></h3>
+<hr />
+<p>Now that you have a Bitbucket account set up, let’s configure <code>git</code> on your local machine.</p>
+<p>When you install <code>git</code>, it comes with a configuration file that you update with your personal settings from the command line.</p>
+<p>Enter the following command to configure your <code>user.name</code>, replacing Elan’s name with your own.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>git config <span class="sc">--</span>global user.name <span class="st">&quot;Elan Ness-Cohn&quot;</span></span></code></pre></div>
+<p>Enter the following command to configure your email address, replacing Elan’s email address with your own.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>git config <span class="sc">--</span>global user.email <span class="st">&quot;elanness-cohn2017@u.northwestern.edu&quot;</span></span></code></pre></div>
+<hr />
+<div id="setup-git-slog" class="section level4">
+<h4>setup <code>git slog</code></h4>
+<hr />
+<p>Additionally, we will set up an slog alias, which will be useful for visualizing the commit log. The utility of this custom command will become clear later on in the tutorial.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>git config <span class="sc">--</span>global <span class="sc">--</span>add alias.slog <span class="st">&#39;log --abbrev-commit   --color=auto --decorate=short --pretty=format:&quot;%C(auto)%h%d %s %Cblue[%Creset%ad%Cblue]%Creset&quot; --graph --branches=* --date-order --remotes=* --tags=* --date=short&#39;</span></span></code></pre></div>
+<hr />
+<hr />
+</div>
+</div>
+</div>
+<div id="part1" class="section level1">
+<h1>Part 1: <code>git</code> Command Line Basics</h1>
+<p>In part one of this hands on tutorial, participants will be writing and using the command line to create their first “helloWorld” <code>git</code> repository on Bitbucket.</p>
+<p>Checkout the <a href="https://urldefense.com/v3/__https://northwestern.zoom.us/rec/share/UKYcw_0RtHhiiMnvL-Q3WO-aHuQDgr0uXllff5lY6UbsCUVsFBG_VNZZyRIGDnIc.4vYGShcyl7ydosOW__;!!Dq0X2DkFhyF93HkjWTBQKhk!GT7UbYU8lzC5_UzpMZGVIaGuI4OZVdLUurrxt2iz4MgaFs8_AQgJ_VQXMyzwSpACy07FMPsqhghg5ClaMA$"><strong>Part 1 Video Recording</strong></a> from December 17th, 2021 below:</p>
+<a href=" https://urldefense.com/v3/__https://northwestern.zoom.us/rec/share/UKYcw_0RtHhiiMnvL-Q3WO-aHuQDgr0uXllff5lY6UbsCUVsFBG_VNZZyRIGDnIc.4vYGShcyl7ydosOW__;!!Dq0X2DkFhyF93HkjWTBQKhk!GT7UbYU8lzC5_UzpMZGVIaGuI4OZVdLUurrxt2iz4MgaFs8_AQgJ_VQXMyzwSpACy07FMPsqhghg5ClaMA$ ">
+<img src="figs/part1VideoRec.png"/>
+</a>
+<hr />
+<hr />
+<div id="initializing-your-git-repo" class="section level2">
+<h2>Initializing your <code>git</code> repo</h2>
+<hr />
+<div id="git-init" class="section level4">
+<h4><code>git init</code></h4>
+<hr />
+<p>Let’s <code>Git</code> started by creating our first <code>git</code> repository. Open up your terminal. Use the make directory (<code>mkdir</code>) command to create a <code>helloWorld_&lt;YOUR INITIALS&gt;</code> directory (i.e. folder) to be used as our repo. Then, use the change directory (<code>cd</code>) command to move into the <code>helloWorld_&lt;YOUR INITIALS&gt;/</code> directory.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#make sure to use your own initials, rather than ENC</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mkdir <span class="sc">~</span><span class="er">/</span>Desktop<span class="sc">/</span>helloWorld_ENC</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>cd <span class="sc">~</span><span class="er">/</span>Desktop<span class="sc">/</span>helloWorld_ENC</span></code></pre></div>
+<p>Let’s turn this directory into a <code>git</code> version controlled repository using the <code>git init</code> command</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>git init</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Initialized empty Git repository <span class="cf">in</span> <span class="sc">/</span>Users<span class="sc">/</span>elanness<span class="sc">-</span>cohn<span class="sc">/</span>Desktop<span class="sc">/</span>helloWorld_ENC<span class="sc">/</span>.git<span class="sc">/</span></span></code></pre></div>
+<p>When we use the <code>git status</code> command we now see we have created a empty <code>git</code> repository.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>git status</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> On branch master</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> No commits yet</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> nothing to <span class="fu">commit</span> (create<span class="sc">/</span>copy files and use <span class="st">&quot;git add&quot;</span> to track)</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="figs/workflow/workflow_p1.png" alt="git init" width="80%" style="border: 0px;" />
+<p class="caption">
+git init
+</p>
+</div>
+<hr />
+<hr />
+</div>
+</div>
+<div id="independent-workflow" class="section level2">
+<h2>Independent Workflow</h2>
+<hr />
+<div id="git-add" class="section level4">
+<h4><code>git add</code></h4>
+<hr />
+<p>Let’s begin working in our repo by creating our first <code>.r</code> file.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>echo <span class="st">&#39;print(&quot;Hello World&quot;)&#39;</span> <span class="sc">&gt;</span> hello.r</span></code></pre></div>
+<p>If we again used the <code>git status</code> command, we will see that we have changed our local repository and have an untracked file.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>git status</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> On branch master</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> No commits yet</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Untracked files<span class="sc">:</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span>  (use <span class="st">&quot;git add &lt;file&gt;...&quot;</span> to include <span class="cf">in</span> what will be committed)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span>     hello.r</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> nothing added to commit but untracked files <span class="fu">present</span> (use <span class="st">&quot;git add&quot;</span> to track)</span></code></pre></div>
+<p>In preparation of creating our first snapshot of the local repository and begin tracking the <code>hello.r</code> file, we can stage our file to be committed using the <code>git add</code> command. Just to recap, staging is a process to tell Git what file(s) we want to commit.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>git add hello.r</span></code></pre></div>
+<p>Using the <code>git status</code> command, we will see that we have now marked the <code>hello.r</code> file to be included in our first commit.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>git status</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> On branch master</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> No commits yet</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Changes to be committed<span class="sc">:</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span>   (use <span class="st">&quot;git rm --cached &lt;file&gt;...&quot;</span> to unstage)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span>      new file<span class="sc">:</span>   hello.r</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="figs/workflow/workflow_p2.png" alt="git add" width="80%" style="border: 0px;" />
+<p class="caption">
+git add
+</p>
+</div>
+<hr />
+</div>
+<div id="git-commit" class="section level4">
+<h4><code>git commit</code></h4>
+<hr />
+<p>We are now ready to take our first snapchat of our <code>git</code> repo. We do this using the <code>git commit</code> command followed by a commit message. It is important to create human readable and informative commit messages. As a resource, see the <a href="https://github.com/RomuloOliveira/commit-messages-guide">Commit Message Guide</a> for helpful templates and guidelines for writing commit messages. For the purpose of this tutorial, let’s use the following – somewhat unhelpful – commit message.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>git commit <span class="sc">-</span>m <span class="st">&quot;added hello.r file&quot;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> [<span class="fu">master</span> (root<span class="sc">-</span>commit) <span class="fl">33e020</span>c] added hello.r file</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="dv">1</span> file changed, <span class="dv">1</span> <span class="fu">insertion</span>(<span class="sc">+</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span>  create mode <span class="dv">100644</span> hello.r</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="figs/workflow/workflow_p3.png" alt="git commit" width="80%" style="border: 0px;" />
+<p class="caption">
+git commit
+</p>
+</div>
+<hr />
+</div>
+<div id="git-log" class="section level4">
+<h4><code>git log</code></h4>
+<hr />
+<p>Now that we have built our first commit, we can check what we have constructed in our repository. While <code>git status</code> checks which branch you are on and if you have any unsaved changes, <code>git log</code> shows us the log of all previous commits on the current branch.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>git log</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> commit <span class="fl">33e020</span><span class="fu">c7b0d665505749788bfe127a2841ccd797</span> (HEAD <span class="ot">-&gt;</span> master)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Author<span class="sc">:</span> Elan Ness<span class="sc">-</span>Cohn <span class="sc">&lt;</span>elanness<span class="sc">-</span>cohn2017<span class="sc">@</span>u.northwestern.edu<span class="sc">&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span> Date<span class="sc">:</span>   Wed Dec <span class="dv">1</span> <span class="dv">18</span><span class="sc">:</span><span class="dv">01</span><span class="sc">:</span><span class="dv">30</span> <span class="dv">2021</span> <span class="sc">-</span><span class="dv">0600</span></span></code></pre></div>
+<hr />
+</div>
+<div id="git-remote" class="section level4">
+<h4><code>git remote</code></h4>
+<hr />
+<p>So far, we have initialized a <code>git</code> repo, wrote a simple <code>.r</code> script, staged the script to be committed, and finally committed the script to be version controlled. All this was done locally on our computer. What we want to do now is to add these local commits to a remote repository on Bitbucket. This will serve as an remote copy of our work, which will allow for collaboration with others in the lab / function as a backup in case the local copies are deleted/lost.</p>
+<p>To get this remote <code>git</code> repo up and running, let’s add your code to an empty Bitbucket repository. If you don’t yet have a Bitbucket repository, create a repository there first.</p>
+<ol style="list-style-type: decimal">
+<li>log into <a href="https://bitbucket.org/">Bitbucket</a> and click the <strong>+</strong> sign that reads “create repository”</li>
+<li>give the repo a UNIQUE name that matches the folder you created above (i.e. <code>helloWorld_&lt;YOUR INITIALS&gt;/</code>)</li>
+<li>select the <code>Test</code> project folder</li>
+<li>select <code>No</code> for both the <code>Include .gitignore?</code> and and <code>Include readme?</code> files. These files are important, but we will create them locally and add them to bitbucket later, rather than using the bitbucket defaults.</li>
+<li>click on the <code>Create repository</code> and then on the clone link to get the remote url info</li>
+</ol>
+<p>Navigate to the root directory of the repository you want to push. In this case our <code>helloWorld_ENC/</code> directory. Change the remote URL on your local repository to the Bitbucket repository to connect the two.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cd <span class="sc">~</span><span class="er">/</span>Desktop<span class="sc">/</span>helloWorld_ENC<span class="sc">/</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>git remote add origin https<span class="sc">:</span><span class="er">//</span>nesscoder<span class="sc">@</span>bitbucket.org<span class="sc">/</span>biocomplexity<span class="sc">/</span>helloworld_enc.git</span></code></pre></div>
+<hr />
+</div>
+<div id="git-push" class="section level4">
+<h4><code>git push</code></h4>
+<hr />
+<p>Finally, we will use the <code>git push</code> command to push the contents of your local repository to the remote Bitbucket repo.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>git push <span class="sc">-</span>u origin <span class="sc">--</span>all</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Enumerating objects<span class="sc">:</span> <span class="dv">3</span>, done.</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Counting objects<span class="sc">:</span> <span class="dv">100</span>% (<span class="dv">3</span><span class="sc">/</span><span class="dv">3</span>), done.</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Writing objects<span class="sc">:</span> <span class="dv">100</span>% (<span class="dv">3</span><span class="sc">/</span><span class="dv">3</span>), <span class="dv">251</span> bytes <span class="sc">|</span> <span class="fl">251.00</span> KiB<span class="sc">/</span>s, done.</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Total <span class="dv">3</span> (delta <span class="dv">0</span>), reused <span class="dv">0</span> (delta <span class="dv">0</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> To https<span class="sc">:</span><span class="er">//</span>bitbucket.org<span class="sc">/</span>biocomplexity<span class="sc">/</span>helloworld_enc.git</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="er">*</span> [new branch]      master <span class="ot">-&gt;</span> master</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Branch <span class="st">&#39;master&#39;</span> set up to track remote branch <span class="st">&#39;master&#39;</span> from <span class="st">&#39;origin&#39;</span>.</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="figs/workflow/workflow_p4.png" alt="git push" width="80%" style="border: 0px;" />
+<p class="caption">
+git push
+</p>
+</div>
+<hr />
+<hr />
+</div>
+</div>
+<div id="collaborative-workflow-exploratory-independent-workflow" class="section level2">
+<h2>Collaborative Workflow / Exploratory Independent Workflow</h2>
+<hr />
+<div id="clone" class="section level4">
+<h4><code>git clone</code></h4>
+<hr />
+<p>Let’s assume we are working collaboratively with another Braun Group Member on a project. Here we can use the <code>git clone</code> to create a local copy of the Bitbucket remote repository we created in the previous section. We will download this repo into a separate folder called <code>BraunGroupMember</code> to simulate a group member downloading our repo onto their own machine.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mkdir <span class="sc">~</span><span class="er">/</span>Desktop<span class="sc">/</span>BraunGroupMember</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>cd <span class="sc">~</span><span class="er">/</span>Desktop<span class="sc">/</span>BraunGroupMember</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>git clone https<span class="sc">:</span><span class="er">//</span>nesscoder<span class="sc">@</span>bitbucket.org<span class="sc">/</span>biocomplexity<span class="sc">/</span>helloworld_enc.git</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="figs/workflow/workflow_p5.png" alt="git clone" width="80%" style="border: 0px;" />
+<p class="caption">
+git clone
+</p>
+</div>
+<hr />
+</div>
+<div id="git-branch" class="section level4">
+<h4><code>git branch</code></h4>
+<hr />
+<p>Let’s head back to our original <code>helloWorld_ENC</code> directory and begin developing our code.</p>
+<p>We’ll start by create a new working branch in our repo. Creating branches are useful when working with a collaborator or when working on exploratory features to add to your code. By creating a branch and only working on this – rather than the master branch – you can feel free to make changes without fear of messing up the working code on the master branch. We will later see how we will merge this new branch into the master branch once we are satisfied with the edits we made.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cd <span class="sc">~</span><span class="er">/</span>Desktop<span class="sc">/</span>helloWorld_ENC</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>git branch myBranch</span></code></pre></div>
+<p>We can use the <code>git branch</code> command now, to see all branches we have in our repository.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>git branch</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span> master</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span>   myBranch</span></code></pre></div>
+<hr />
+</div>
+<div id="git-checkout" class="section level4">
+<h4><code>git checkout</code></h4>
+<hr />
+<p>You can move to the new branch you just created using the <code>git checkout</code> command. Now if we run the <code>git branch</code> command, we see that we are now on the branch called <code>myBranch</code>, rather than <code>master</code>.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>git checkout myBranch</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>git branch</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span>   master</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span> myBranch</span></code></pre></div>
+<p>In this case, let’s pretend both lab members are editing the <code>hello.r</code> file. Note we are still on the branch called <code>myBranch</code>.</p>
+<p>Open up the <code>hello.r</code> file and change the contents from</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">print(&quot;Hello World&quot;)</span><span class="st">`</span> to <span class="st">`</span><span class="at">print(&quot;Hello &lt;Your Name&gt;&quot;)</span><span class="st">`</span></span></code></pre></div>
+<p>Using the <code>git status</code> command, we can see we have changed the contents of <code>hello.r</code> only on the branched called <code>myBranch</code>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>git status</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>On branch myBranch</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>Changes not staged <span class="cf">for</span> commit<span class="sc">:</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  (use <span class="st">&quot;git add &lt;file&gt;...&quot;</span> to update what will be committed)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  (use <span class="st">&quot;git restore &lt;file&gt;...&quot;</span> to discard changes <span class="cf">in</span> working directory)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    modified<span class="sc">:</span>   hello.r</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>no changes added to <span class="fu">commit</span> (use <span class="st">&quot;git add&quot;</span> and<span class="sc">/</span>or <span class="st">&quot;git commit -a&quot;</span>)</span></code></pre></div>
+<p>Let’s now <code>add</code>, <code>commit</code> the change, and look at the log. Note we are using the <code>slog</code> alias that we created when configuring git. This alias shortens the log output, making it easier to quickly visualize the <code>git</code> history.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>git add hello.r </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>git commit <span class="sc">-</span>m <span class="st">&quot;changed Hello World to Hello Elan&quot;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>git slog</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span> 7d3afd9 (HEAD <span class="ot">-&gt;</span> myBranch) changed Hello World to Hello Elan [<span class="dv">2021-12-01</span>]</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span> <span class="fl">33e020</span><span class="fu">c</span> (origin<span class="sc">/</span>master, master) added hello.r file [<span class="dv">2021-12-01</span>]</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="figs/workflow/workflow_p6.png" alt="git branch" width="80%" style="border: 0px;" />
+<p class="caption">
+git branch
+</p>
+</div>
+<hr />
+</div>
+<div id="git-merge" class="section level4">
+<h4><code>git merge</code></h4>
+<hr />
+<p>Once we are satisfied with the exploratory work on <code>myBranch</code>, we may want to merge it into the master branch. This is done using the <code>git merge</code> command. Here we checkout the master branch, and merge <code>myBranch</code> into it. Finally, we push the merged master branch to the remote repo on Bitbucket.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>git checkout master </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>git merge myBranch </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>git push</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>git slog</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span> 7d3afd9 (HEAD <span class="ot">-&gt;</span> master, origin<span class="sc">/</span>master, myBranch) changed Hello World to Hello Elan [<span class="dv">2021-12-01</span>]</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span> <span class="fl">33e020</span>c added hello.r file [<span class="dv">2021-12-01</span>]</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="figs/workflow/workflow_p7.png" alt="git merge" width="80%" style="border: 0px;" />
+<p class="caption">
+git merge
+</p>
+</div>
+<p>Now let’s pretend we are a different lab member working on the same project. Since we <a href="#clone">cloned</a> the Bitbucket repo in the previous section, our repository does not have the changes we just made – something typical of two people collaborating on the same code.</p>
+<p>Let’s again create a branch to simulate this other lab member working on an exploratory function they wish to add to the project.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cd <span class="sc">~</span><span class="er">/</span>Desktop<span class="sc">/</span>BraunGroupMember<span class="sc">/</span>helloworld_enc</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>git branch BraunGroupMember</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>git branch</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span>   BraunGroupMember</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span> master</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>git checkout BraunGroupMember</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>git branch</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span> BraunGroupMember</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span>   master</span></code></pre></div>
+<p>This lab member also was working on the <code>hello.r</code> file, but made a different change to the <code>print("Hello World")</code>. Open the <code>hello.r</code> file and change</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">print(&quot;Hello World&quot;)</span><span class="st">`</span> to <span class="st">`</span><span class="at">print(&quot;Hello BraunGroupMember&quot;)</span><span class="st">`</span></span></code></pre></div>
+<p>Let’s again <code>add</code>, <code>commit</code> the change, and look at the log.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>git add hello.r </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>git commit <span class="sc">-</span>m <span class="st">&quot;changed Hello World to Hello BraunGroupMember&quot;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>git slog</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span> <span class="fu">dac0d24</span> (HEAD <span class="ot">-&gt;</span> BraunGroupMember) changed Hello World to Hello BraunGroupMember [<span class="dv">2021-12-01</span>]</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span> <span class="fl">33e020</span><span class="fu">c</span> (origin<span class="sc">/</span>master, origin<span class="sc">/</span>HEAD, master) added hello.r file [<span class="dv">2021-12-01</span>]</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="figs/workflow/workflow_p8.png" alt="git branch" width="80%" style="border: 0px;" />
+<p class="caption">
+git branch
+</p>
+</div>
+<hr />
+</div>
+<div id="git-fetch" class="section level4">
+<h4><code>git fetch</code></h4>
+<hr />
+<p>Knowing we were working collaboratively on a project, we may wish to check if our collaborator has made changes to the code. We can fetch the changes our collaborators have pushed to the Bitbucket repo using the <code>git fetch</code> command.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>git fetch</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> remote<span class="sc">:</span> Enumerating objects<span class="sc">:</span> <span class="dv">5</span>, done.</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> remote<span class="sc">:</span> Counting objects<span class="sc">:</span> <span class="dv">100</span>% (<span class="dv">5</span><span class="sc">/</span><span class="dv">5</span>), done.</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> remote<span class="sc">:</span> Total <span class="dv">3</span> (delta <span class="dv">0</span>), reused <span class="dv">0</span> (delta <span class="dv">0</span>), pack<span class="sc">-</span>reused <span class="dv">0</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Unpacking objects<span class="sc">:</span> <span class="dv">100</span>% (<span class="dv">3</span><span class="sc">/</span><span class="dv">3</span>), done.</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> From https<span class="sc">:</span><span class="er">//</span>bitbucket.org<span class="sc">/</span>biocomplexity<span class="sc">/</span>helloworld_enc</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span>    <span class="fl">33e020</span>c..7d3afd9  master     <span class="ot">-&gt;</span> origin<span class="sc">/</span>master</span></code></pre></div>
+<p>You’ll notice at this point, that we have now created a fork in the commit history. Since the <code>myBranch</code> branch and the <code>BraunGroupMember</code> branch originated from the same root node, but added different functionalities.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>git slog</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span> <span class="fu">dac0d24</span> (HEAD <span class="ot">-&gt;</span> BraunGroupMember) changed Hello World to Hello BraunGroupMember [<span class="dv">2021-12-01</span>]</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">|</span> <span class="er">*</span> 7d3afd9 (origin<span class="sc">/</span>master, origin<span class="sc">/</span>HEAD) changed Hello World to Hello Elan [<span class="dv">2021-12-01</span>]</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">|/</span>  </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span> <span class="er">*</span> <span class="fl">33e020</span><span class="fu">c</span> (master) added hello.r file [<span class="dv">2021-12-01</span>]</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="figs/workflow/workflow_p9.png" alt="git fetch" width="80%" style="border: 0px;" />
+<p class="caption">
+git fetch
+</p>
+</div>
+<hr />
+</div>
+<div id="git-pull" class="section level4">
+<h4><code>git pull</code></h4>
+<hr />
+<p>Regardless, let’s pull the changes made by our collaborator, so that are master branch is up to date. The <code>git pull</code> command can be thought of as fetching and merging the remote branch with the one we are on. In this case we are fetching and merging the master branch. Note the change in the position of <code>master</code> from the previous <code>slog</code> – i.e. master is now at <code>7d3afd9</code> instead of <code>33e020c</code>.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>git checkout master</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>git pull</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>git slog</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span> <span class="fu">dac0d24</span> (BraunGroupMember) changed Hello World to Hello BraunGroupMember [<span class="dv">2021-12-01</span>]</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">|</span> <span class="er">*</span> 7d3afd9 (HEAD <span class="ot">-&gt;</span> master, origin<span class="sc">/</span>master, origin<span class="sc">/</span>HEAD) changed Hello World to Hello Elan [<span class="dv">2021-12-01</span>]</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">|/</span>  </span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span> <span class="er">*</span> <span class="fl">33e020</span>c added hello.r file [<span class="dv">2021-12-01</span>]</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="figs/workflow/workflow_p10.png" alt="git pull" width="80%" style="border: 0px;" />
+<p class="caption">
+git pull
+</p>
+</div>
+<hr />
+</div>
+<div id="dealing-with-merge-conflicts" class="section level4">
+<h4>Dealing With Merge Conflicts</h4>
+<hr />
+<p>Given we are working collaboratively, we now want to merge the updated master branch with our own <code>BraunGroupMember</code> branch. Unfortunately, when we try and merge the <code>BraunGroupMember</code> branch into master; we see there is a merge conflict.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>git merge BraunGroupMember </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Auto<span class="sc">-</span>merging hello.r</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">CONFLICT</span> (content)<span class="sc">:</span> Merge conflict <span class="cf">in</span> hello.r</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Automatic merge failed; fix conflicts and then commit the result.</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="figs/workflow/workflow_p11.png" alt="Merge conflicts" width="80%" style="border: 0px;" />
+<p class="caption">
+Merge conflicts
+</p>
+</div>
+<p>Opening up the <code>hello.r</code> file, we can see where the conflict occurred.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>nano hello.r</span></code></pre></div>
+<p>In this case, both branches changed the same lines of code, and <code>git</code> is not sure which line is correct.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span><span class="er">&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Hello Elan&quot;</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="sc">==</span><span class="er">=====</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Hello BraunGroupMember&quot;</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span><span class="er">&gt;&gt;&gt;&gt;&gt;&gt;</span> BraunGroupMember</span></code></pre></div>
+<p>To resolve the conflict, we must manually change the code. The solution in this case might look something like this.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Hello Elan and BraunGroupMember&quot;</span>)</span></code></pre></div>
+<p>After resolving the conflict we must re-add the file with the merge conflict and continue the merge.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>git add hello.r</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>git merge <span class="sc">--</span>continue</span></code></pre></div>
+<p>This will open the <code>vi</code> editor to add a commit message, such as <code>resolved conflict between master and 'BraunGroupMember' branch</code>. When you are done adding the commit message, hit the <code>ESC</code> button, then type <code>:x</code> to save and quit.</p>
+<p>Finally, looking at the <code>slog</code> we see we have successfully merged the conflicting branches.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>git push</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>git slog</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span>   <span class="fu">aae958a</span> (HEAD <span class="ot">-&gt;</span> master, origin<span class="sc">/</span>master, origin<span class="sc">/</span>HEAD) resolved conflict between master and <span class="st">&#39;BraunGroupMember&#39;</span> branch [<span class="dv">2021-12-01</span>]</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">|</span>\  </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">|</span> <span class="er">*</span> <span class="fu">dac0d24</span> (BraunGroupMember) changed Hello World to Hello BraunGroupMember [<span class="dv">2021-12-01</span>]</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span> <span class="er">|</span> 7d3afd9 changed Hello World to Hello Elan [<span class="dv">2021-12-01</span>]</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">|/</span>  </span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span> <span class="er">*</span> <span class="fl">33e020</span>c added hello.r file [<span class="dv">2021-12-01</span>]</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="figs/workflow/workflow_p12.png" alt="Resolve merge conflicts" width="80%" style="border: 0px;" />
+<p class="caption">
+Resolve merge conflicts
+</p>
+</div>
+<p>If we go back to our original repository (<code>~/Desktop/helloWorld_ENC</code>), we can bring this local repository up-to-date using the <code>git pull</code> command. Note the only difference between the two <code>slogs</code> is the above has a tag for the locally created (BraunGroupMember) branch, while the bottom has a tag for the locally created (myBranch) branch.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>cd <span class="sc">~</span><span class="er">/</span>Desktop<span class="sc">/</span>helloWorld_ENC</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>git pull</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> remote<span class="sc">:</span> Enumerating objects<span class="sc">:</span> <span class="dv">10</span>, done.</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> remote<span class="sc">:</span> Counting objects<span class="sc">:</span> <span class="dv">100</span>% (<span class="dv">10</span><span class="sc">/</span><span class="dv">10</span>), done.</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> remote<span class="sc">:</span> Compressing objects<span class="sc">:</span> <span class="dv">100</span>% (<span class="dv">2</span><span class="sc">/</span><span class="dv">2</span>), done.</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> remote<span class="sc">:</span> Total <span class="dv">6</span> (delta <span class="dv">0</span>), reused <span class="dv">0</span> (delta <span class="dv">0</span>), pack<span class="sc">-</span>reused <span class="dv">0</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Unpacking objects<span class="sc">:</span> <span class="dv">100</span>% (<span class="dv">6</span><span class="sc">/</span><span class="dv">6</span>), done.</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> From https<span class="sc">:</span><span class="er">//</span>bitbucket.org<span class="sc">/</span>biocomplexity<span class="sc">/</span>helloworld_enc</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span>    7d3afd9..aae958a  master     <span class="ot">-&gt;</span> origin<span class="sc">/</span>master</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Updating 7d3afd9..aae958a</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Fast<span class="sc">-</span>forward</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span>  hello.r <span class="sc">|</span> <span class="dv">2</span> <span class="sc">+-</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span>  <span class="dv">1</span> file changed, <span class="dv">1</span> <span class="fu">insertion</span>(<span class="sc">+</span>), <span class="dv">1</span> <span class="fu">deletion</span>(<span class="sc">-</span>)</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>git slog</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span>   <span class="fu">aae958a</span> (HEAD <span class="ot">-&gt;</span> master, origin<span class="sc">/</span>master) resolved conflict between master and <span class="st">&#39;BraunGroupMember&#39;</span> branch [<span class="dv">2021-12-01</span>]</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">|</span>\  </span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">|</span> <span class="er">*</span> dac0d24 changed Hello World to Hello BraunGroupMember [<span class="dv">2021-12-01</span>]</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">*</span> <span class="er">|</span> 7d3afd9 (myBranch) changed Hello World to Hello Elan [<span class="dv">2021-12-01</span>]</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">|/</span>  </span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span> <span class="er">*</span> <span class="fl">33e020</span>c added hello.r file [<span class="dv">2021-12-01</span>]</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="figs/workflow/workflow_p13.png" alt="git pull" width="80%" style="border: 0px;" />
+<p class="caption">
+git pull
+</p>
+</div>
+<hr />
+<hr />
+</div>
+</div>
+<div id="helpful-tips-and-tricks" class="section level2">
+<h2>Helpful Tips and Tricks</h2>
+<hr />
+<div id="gitignore" class="section level4">
+<h4>.gitignore</h4>
+<hr />
+<p>Often, you’ll have a class of files that you don’t want <code>git</code> to automatically add or even show you as being untracked. These are generally automatically generated files such as log files or files produced by your build system. In such cases, you can create a <code>.gitignore</code> file listing patterns to match and ignore.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>nano .gitignore</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Some examples that are by no means exhaustive </span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this structure is useful if you would like to ignore the contents of an entire directory/folder.</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>presentations<span class="sc">/</span><span class="er">*</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>results<span class="sc">/</span>plots<span class="sc">/</span><span class="er">*</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Log files</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="er">*</span>.log</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co"># pdf files</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.pdf</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="co"># image files</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.png</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.jpeg</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Generated by MacOS</span></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>.DS_Store</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Large media files</span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.mp4</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.tiff</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.avi</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.flv</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.mov</span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.wmv</span></code></pre></div>
+<p>See the <a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring">ProGit Manual</a> for more information and suggestions on creating your <code>.gitignore</code> file.</p>
+<hr />
+<hr />
+</div>
+</div>
+</div>
+<div id="part-2-microsoft-visual-studio-code-gui-demonstration" class="section level1">
+<h1>Part 2: Microsoft Visual Studio Code GUI Demonstration</h1>
+<p>In part two of this tutorial, participants will be exposed to the Microsoft Visual Studio Code GUI for an alternative way to interact with <code>git</code>.</p>
+<p>Checkout the <a href="https://urldefense.com/v3/__https://northwestern.zoom.us/rec/share/7-OSZp9NCohuG1NahlR8qq3KrGjs3RnmzxERPXLYF9Q0RDC19kLPY7sUqkJO6uO8.DhHOu_2Cuv7Es9_H__;!!Dq0X2DkFhyF93HkjWTBQKhk!FjkNqmr1kcO8EX_XE3hqvJTLQUa4dk-E6EIfXuQqpBdvHZ_Yr6n8uRyBrK0ShTNVAKIeI_X7K0_I1IW8IA$"><strong>Part 2 Video Recording</strong></a> from December 20th, 2021 below:</p>
+<a href=" https://urldefense.com/v3/__https://northwestern.zoom.us/rec/share/7-OSZp9NCohuG1NahlR8qq3KrGjs3RnmzxERPXLYF9Q0RDC19kLPY7sUqkJO6uO8.DhHOu_2Cuv7Es9_H__;!!Dq0X2DkFhyF93HkjWTBQKhk!FjkNqmr1kcO8EX_XE3hqvJTLQUa4dk-E6EIfXuQqpBdvHZ_Yr6n8uRyBrK0ShTNVAKIeI_X7K0_I1IW8IA$ ">
+<img src="figs/part2VideoRec.png"/>
+</a>
+<hr />
+<div id="installation-of-microsoft-vscode-and-bitbucket-extension" class="section level2">
+<h2>Installation of Microsoft VScode and Bitbucket Extension</h2>
+<hr />
+<p>Installation of Microsoft VScode can be found here (<a href="https://visualstudio.microsoft.com/downloads/" class="uri">https://visualstudio.microsoft.com/downloads/</a>). It supports Window/Mac OS/Linux.</p>
+<p>Note that it is the blue <em>Visual Studio Code</em> that we want, not the purple <em>Visual Studio</em>. VScode itself is a light-weighted source code editor, but with various extensions installed it can let you run codes from multiple programming languages (C/C++,python,java,matlab,r,ampl etc.). Git is also embedded in it.</p>
+<p>Here’s how my VScode looks like on Windows. Our next objective is to install the Bitbucket Extension; once successful, you would have the two icons marked in red rectangles. The instructions of installing Bitbucket Extension can be found here (<a href="https://support.atlassian.com/bitbucket-cloud/docs/get-started-with-vs-code/" class="uri">https://support.atlassian.com/bitbucket-cloud/docs/get-started-with-vs-code/</a>).</p>
+<div class="figure" style="text-align: center">
+<img src="figs/vscode/vscode_welcome.png" alt="**Microsoft VScode Startup Page**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong>Microsoft VScode Startup Page</strong>
+</p>
+</div>
+<p>In short, on the left panel, click ‘Extensions’, search for <em>Jira and Bitbucket (Atlassian Labs)</em>. You should have a blue icon of <em>install</em> instead of <em>uninstall</em>, and just install it.</p>
+<div class="figure" style="text-align: center">
+<img src="figs/vscode/vscode_bitbucket_p1.png" alt="**Installation of Bitbucket Extension**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong>Installation of Bitbucket Extension</strong>
+</p>
+</div>
+<p>After installation, navigate to the <em>Atlassian Settings</em> page and login to Bitbucket. You can get to this page by either 1) <strong>click the bottom left bitbucket icon marked in red</strong>, or 2) <strong>use F1 (keyboard shortcut for <em>Show Command Palette</em>) and search for <em>Atlassian Settings</em> </strong>.</p>
+<div class="figure" style="text-align: center">
+<img src="figs/vscode/vscode_bitbucket_p2.png" alt="**Login to Bitbucket**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong>Login to Bitbucket</strong>
+</p>
+</div>
+<hr />
+</div>
+<div id="get-started-with-vscode" class="section level2">
+<h2>Get Started With VScode</h2>
+<hr />
+<p>The power of VScode is indeed an integrated environment during your work. There are graphic interfaces that are easy to operate with, but at the same time, if you are unsure how to navigate to them, <em>you can always use the command lines!</em></p>
+<p>For the remaining illustrations, I will be working on the git tutorial folder in Bitbucket. For the first time you may clone it with command lines, or if you may notice, you can also click <em>Clone Repository</em> button. You will then be prompted to enter the URL and choose the destination.</p>
+<div class="figure" style="text-align: center">
+<img src="figs/vscode/vscode_clone.png" alt="**Clone Repos**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong>Clone Repos</strong>
+</p>
+</div>
+<p>This is how the interface looks like when I open this folder. We’ll talk about source controls later. Just notice here that you can always use the terminal for commands.</p>
+<div class="figure" style="text-align: center">
+<img src="figs/vscode/vscode_folder_interface.png" alt="**Folder Interface**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong>Folder Interface</strong>
+</p>
+</div>
+<hr />
+</div>
+<div id="visualization-of-your-repo" class="section level2">
+<h2>Visualization of Your Repo</h2>
+<hr />
+<p>Here is the view of the repo when I was editing the gitTutorial Rmarkdown. You can always open a file by double-clicking it in the left panel. It is not necessary that you do all works in VScode; you can create and edit files in your own file explorer, but VScode will always display latest changes simultaneously.</p>
+<div class="figure" style="text-align: center">
+<img src="figs/vscode/vscode_repo_visualization.png" alt="**Repository Visualization**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong>Repository Visualization</strong>
+</p>
+</div>
+<p>VScode has real-time markers that indicate any newly-made (uncommitted) changes. For example, I have uncommitted changes in the Rmarkdown file, and next to line numbers you can see a green stripe. This indicates that new lines are added to the current file. Although not shown here, other kinds of markers include <em>red triangle</em> (deleted contents) and <em>blue stripes</em> (modified contents).</p>
+<p>VScode also provides visualization of overall uncommitted changes in the repo, as you can see on the left panel. This is extremely powerful when many files have been changed.</p>
+<ul>
+<li>A <em>green dot</em> next to a <em>folder</em> means that this folder contains <em>emphasized item</em>: there might be untracked files, or changes that haven’t been committed.</li>
+</ul>
+<p>Markers below can be seen when you navigate to both <em>Explorer</em> and <em>Source Control</em> panel.</p>
+<ul>
+<li>A <em>green U</em> next to a <em>file</em> means that this file is untracked.</li>
+<li>A <em>Khaki M</em> next to a <em>file</em> means that this file has been modified.</li>
+<li>A <em>red D</em> next to a <em>file</em> means that this file has been removed.</li>
+</ul>
+<hr />
+</div>
+<div id="source-control" class="section level2">
+<h2>Source Control</h2>
+<hr />
+<div id="commit-changes" class="section level4">
+<h4><code>Commit Changes</code></h4>
+<hr />
+<p>Now we have left the <em>Explorer</em> panel. Here we have the <em>Source Control</em> panel, and this is where git is embedded in VScode. In this panel only the uncommitted changes are shown. For every file there’s a <em>go back</em> icon to <em>discard this change</em> and a <em>plus</em> icon to stage this change. We can also open files in this panel instead of the <em>Explorer</em> panel. In this time VScode will display two versions of file simultaneously, one before the change and one after the change.</p>
+<div class="figure" style="text-align: center">
+<img src="figs/vscode/vscode_commit_p1.png" alt="**Commit Changes, Step 1**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong>Commit Changes, Step 1</strong>
+</p>
+</div>
+<p>Here, if I decide just to include the change made in <em>gitTutorial.Rmd</em> in the next commit, I would click the <em>plus</em> icon next to this file. Here’s how VScode will look like:</p>
+<div class="figure" style="text-align: center">
+<img src="figs/vscode/vscode_commit_p2.png" alt="**Commit Changes, Step 2**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong>Commit Changes, Step 2</strong>
+</p>
+</div>
+<p>Now this file will be put under <em>Staged Changes</em> in the left panel. You can always undo this stage command by clicking the <em>minus</em> icon next to this file. On the top of left panel there’s place for you to enter the commit message, and this commit will be executed once you click the <em>check</em>.</p>
+<p>Okay I’ve commit the change. In the figure below, if you see the log, my commit message is <em>Error!</em> because that’s an error and I want to undo the commit. VScode let you do this simply by navigating to the icon <strong><code>...</code>/Commit/Undo Last Commit</strong>.</p>
+<div class="figure" style="text-align: center">
+<img src="figs/vscode/vscode_commit_p3.png" alt="**Undo Last Commit**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong>Undo Last Commit</strong>
+</p>
+</div>
+<p>And here is how it looks after <em>Undo Last Commit</em>. This commit will not show up in the log; HEAD and master get back to where they were; you get back your commit message and the change has been staged but not committed. In short, you get back to the time before clicking the <em>check</em>.</p>
+<div class="figure" style="text-align: center">
+<img src="figs/vscode/vscode_commit_p4.png" alt="**Undo Last Commit, Result**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong>Undo Last Commit, Result</strong>
+</p>
+</div>
+<hr />
+</div>
+<div id="manage-branches" class="section level4">
+<h4><code>Manage Branches</code></h4>
+<hr />
+<p>Branches are also easy to handle. There are two ways to manage them. The simplest one is to click the the bottom left tag with current branch name. But you can only create new branches or checkout to an existing branch.</p>
+<div class="figure" style="text-align: center">
+<img src="figs/vscode/vscode_branch_p1.png" alt="**Manage Branches, 1st Method**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong>Manage Branches, 1st Method</strong>
+</p>
+</div>
+<p>The other way is to use our powerful <strong><code>...</code></strong>. We can use <strong><code>...</code>/Checkout to…</strong> to check out to an existing branch or use <strong><code>...</code>/Branch</strong> to create/merge/publish branch etc.. Here I won’t illustrate their uses in detail; you would find them easy to use once you get there.</p>
+<div class="figure" style="text-align: center">
+<img src="figs/vscode/vscode_branch_p2.png" alt="**Manage Branches, 2nd Method**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong>Manage Branches, 2nd Method</strong>
+</p>
+</div>
+<hr />
+</div>
+<div id="interact-with-remote" class="section level4">
+<h4><code>Interact with Remote</code></h4>
+<hr />
+<p>Doing fetch/pull/push can also be done by navigating to <strong><code>...</code></strong>. They are under <strong><code>...</code>/Pull,Push</strong> and you also get to choose which remote you want to interact with, if there are multiple remotes.</p>
+<div class="figure" style="text-align: center">
+<img src="figs/vscode/vscode_remote_p1.png" alt="**Fetch/Pull/Push**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong>Fetch/Pull/Push</strong>
+</p>
+</div>
+<p>Note that there is another command <em>Sync</em> under <strong><code>...</code>/Pull,Push</strong>, and a shortcut to it is the bottom left sync button. It stands for <em>pull from the remote, and then push to it</em>. Many times I found this shortcut to be useful.</p>
+<div class="figure" style="text-align: center">
+<img src="figs/vscode/vscode_remote_p2.png" alt="**Sync Button**" width="100%" style="border: 0px;" />
+<p class="caption">
+<strong>Sync Button</strong>
+</p>
+</div>
+<hr />
+</div>
+</div>
+<div id="other-version-control-extensions-in-vscode" class="section level2">
+<h2>Other Version Control Extensions in VScode</h2>
+<hr />
+<p>Till here we have covered basic GUIs to use git in VScode. There are many other source control providers having their extensions available, and you can explore them yourself through this document (<a href="https://code.visualstudio.com/docs/editor/versioncontrol" class="uri">https://code.visualstudio.com/docs/editor/versioncontrol</a>).</p>
+<hr />
+<hr />
+</div>
+</div>
+<div id="additional-links-and-sources" class="section level1">
+<h1>Additional Links and Sources</h1>
+<ul>
+<li><p><a href="https://bitbucket.org/biocomplexity/anexampleproject/src/master/">biocomplexity/anexampleproject/</a>- Example project for how to organize the directories in your repo.</p></li>
+<li><p><a href="https://www.youtube.com/watch?v=Uszj_k0DGsg&amp;ab_channel=freeCodeCamp.org">Intermediate Git Video Tutorial - Setting up your workflow</a></p></li>
+<li><p><a href="https://git-scm.com/book/en/v2">GitPro Book</a></p></li>
+<li><p><a href="https://missing.csail.mit.edu/">MIT: The Missing Semester Git Tutorial</a></p></li>
+<li><p><a href="https://code.visualstudio.com/">Microsoft Visual Studio Code GUI</a></p></li>
+<li><p><a href="https://git-scm.com/downloads/guis">Other git GUI-Clients</a></p></li>
+</ul>
+</div>
+</div>
+
+   
+   
+            
+      
+
+  <script>
+    $(document).ready(function () {
+
+			
+ 		
+	    });
+  </script>
+
+
+
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>

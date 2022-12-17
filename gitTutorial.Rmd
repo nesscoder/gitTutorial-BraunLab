@@ -1,0 +1,976 @@
+---
+title: "Braun Group `git` Tutorial"
+subtitle: "Let's `Git` Started"
+author: "Created by Chunni Ji, Ziyu Zhao, and Elan Ness-Cohn"
+date: "12/17/2021"
+output:
+  rmdformats::readthedown:
+    toc_depth: 4
+    self_contained: FALSE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.align = "center"
+)
+```
+
+---
+
+# Pre-tutorial Work 
+
+---
+
+### Introduction to `git`
+
+As you may know already, the Braun group uses `git` for version control, sharing of work, and as a digital "lab notebook". Using `git` is a group requirement! Aside from learning a marketable skill, mastering `git` will make your time in grad school a heck-of-a-lot easier. By putting in the effort now, your future self will thank you for having well documented code to refresh your memory on a project you were working on months/years previously. Additionally, you will save yourself from agonizing heartache, if something was to happen to your local computer, since you will always have a remote backup to your work! As such, the expectation is to commit your work into a `git` repository locally on your computer, and push those commits to the server on a regular basis. 
+
+If you are not already familiar with `git`, no worries! This is exactly what this tutorial is here to teach you!
+
+---
+
+Pre-tutorial checklist
+
+-   Watch the [`git` lecture](#video)
+-   Set up your [Bitbucket account](#bbaccount)
+-   [Configure `git`](#config) on your local machine
+
+---
+
+Below is a complete list of the most common base commands available to you in `git` and cheat sheet for your reference. By the end of the tutorial you should have a grasp of how these commands work and be ready to use `git` for all your research version control needs!
+
+
+**Basic `git` Commands**
+
+-   `git init` - create a local `.git` repository
+-   `git status` - checks which branch you are on and if you have any unsaved changes
+-   `git add` - add local files to be staged for remote
+-   `git commit` - stage/commit local changes
+-   `git log` - shows log of previous commits on current branch
+-   `git push` - push local commits to remote
+-   `git clone` - clone remote repository
+-   `git branch` - list all available branches
+-   `git checkout` - move to new branch
+-   `git merge` - merge branches together
+-   `git fetch` - fetches most recent version from remote without merging
+-   `git pull` - pull most recent version from remote and attempts merge
+
+```{r, echo=F, out.width="100%", fig.cap="**`git` Cheat Sheet for Quick Reference**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/overview.png")
+                       
+```
+
+---
+
+### Video Lecture {#video}
+
+---
+
+Before continuing with this tutorial, please watch the video lecture below to familiarize yourself with the inner workings of `git`. After reviewing the lecture, we'll get some hands on experience using `git` in [Part 1](#part1) of the tutorial.
+
+```{r, echo= FALSE}
+library(vembedr)
+
+ embed_youtube("2sjqTHE0zok")%>%
+  use_bs_responsive()
+```
+
+
+---
+
+### Create a Bitbucket account {#bbaccount}
+
+---
+
+The Braun Group has two main remote repositories: 
+
+- The internally-hosted `git` server (i.e. biocomplexity `<Netid>@biocomplexity.northwestern.edu`) -- housed in Rosemary's office.
+
+- The cloud-based repository (i.e. [Bitbucket/biocomplexity](https://bitbucket.org/biocomplexity/)) -- housed on Bitbucket's server.
+
+Bitbucket has less space than the lab server, but it's much easier to access! For rotation and masters students, that gives the important advantage of getting you up and running quickly! When your project evolves into something longer term or more complex than what Bitbucket can handle, we'll shift you to the lab server.
+
+You should all have received an invitation to join the "biocomplexity" team on Bitbucket. Please accept the invitation and set up an account if necessary. If you already have a Bitbucket account under another email address, let Rosemary know -- [rbraun\@northwester.edu](mailto:rbraun@northwester.edu).
+
+---
+
+### Configure `git`{#config}
+
+---
+
+Now that you have a Bitbucket account set up, let's configure `git` on your local machine.
+
+When you install `git`, it comes with a configuration file that you update with your personal settings from the command line.
+
+Enter the following command to configure your `user.name`, replacing Elan's name with your own.
+
+```{r, eval=F}
+git config --global user.name "Elan Ness-Cohn"
+```
+
+Enter the following command to configure your email address, replacing Elan's email address with your own.
+
+```{r, eval=F}
+git config --global user.email "elanness-cohn2017@u.northwestern.edu"
+```
+
+---
+
+#### setup `git slog`
+
+---
+
+Additionally, we will set up an slog alias, which will be useful for visualizing the commit log. The utility of this custom command will become clear later on in the tutorial. 
+
+```{r, eval=F}
+git config --global --add alias.slog 'log --abbrev-commit   --color=auto --decorate=short --pretty=format:"%C(auto)%h%d %s %Cblue[%Creset%ad%Cblue]%Creset" --graph --branches=* --date-order --remotes=* --tags=* --date=short'
+```
+
+---
+
+---
+
+# Part 1: `git` Command Line Basics {#part1}
+
+In part one of this hands on tutorial, participants will be writing and using the command line to create their first "helloWorld" `git` repository on Bitbucket.
+
+Checkout the [**Part 1 Video Recording**](https://urldefense.com/v3/__https://northwestern.zoom.us/rec/share/UKYcw_0RtHhiiMnvL-Q3WO-aHuQDgr0uXllff5lY6UbsCUVsFBG_VNZZyRIGDnIc.4vYGShcyl7ydosOW__;!!Dq0X2DkFhyF93HkjWTBQKhk!GT7UbYU8lzC5_UzpMZGVIaGuI4OZVdLUurrxt2iz4MgaFs8_AQgJ_VQXMyzwSpACy07FMPsqhghg5ClaMA$) from December 17th, 2021 below:
+
+```{r, echo=F, out.width="100%", fig.cap="**Part 1 Video Recording**", out.extra='style="border: 0px;"'}
+
+# knitr::include_graphics(path="./figs/part1VideoRec.png")
+
+image_link <- function(image,url,...){
+  htmltools::a(
+    href=url,
+    htmltools::img(src=image,...)
+    )
+}
+
+image_link("./figs/part1VideoRec.png", url = " https://urldefense.com/v3/__https://northwestern.zoom.us/rec/share/UKYcw_0RtHhiiMnvL-Q3WO-aHuQDgr0uXllff5lY6UbsCUVsFBG_VNZZyRIGDnIc.4vYGShcyl7ydosOW__;!!Dq0X2DkFhyF93HkjWTBQKhk!GT7UbYU8lzC5_UzpMZGVIaGuI4OZVdLUurrxt2iz4MgaFs8_AQgJ_VQXMyzwSpACy07FMPsqhghg5ClaMA$ ")
+                       
+```
+
+---
+
+---
+
+## Initializing your `git` repo
+
+---
+
+#### `git init`
+
+---
+
+Let's `Git` started by creating our first `git` repository.
+Open up your terminal. Use the make directory (`mkdir`) command to create a `helloWorld_<YOUR INITIALS>` directory (i.e. folder) to be used as our repo. Then, use the change directory (`cd`) command to move into the `helloWorld_<YOUR INITIALS>/` directory.
+
+```{r, eval=F}
+#make sure to use your own initials, rather than ENC
+mkdir ~/Desktop/helloWorld_ENC
+cd ~/Desktop/helloWorld_ENC
+```
+
+Let's turn this directory into a `git` version controlled repository using the `git init` command
+
+```{r, eval=F}
+git init
+
+> Initialized empty Git repository in /Users/elanness-cohn/Desktop/helloWorld_ENC/.git/
+```
+
+When we use the `git status` command we now see we have created a empty `git` repository.
+
+```{r, eval=F}
+git status
+
+> On branch master
+
+> No commits yet
+
+> nothing to commit (create/copy files and use "git add" to track)
+```
+
+```{r, echo=F, out.width="80%", fig.cap="git init", out.extra='style="border: 0px;"', fig.align="center"}
+
+knitr::include_graphics(path="./figs/workflow/workflow_p1.png")
+                       
+```
+
+---
+
+---
+
+## Independent Workflow
+
+---
+
+#### `git add`
+
+---
+
+Let's begin working in our repo by creating our first `.r` file.
+
+```{r, eval=F}
+echo 'print("Hello World")' > hello.r
+```
+
+If we again used the `git status` command, we will see that we have changed our local repository and have an untracked file. 
+
+```{r, eval=F}
+git status
+
+> On branch master
+
+> No commits yet
+
+> Untracked files:
+>  (use "git add <file>..." to include in what will be committed)
+>     hello.r
+
+> nothing added to commit but untracked files present (use "git add" to track)
+```
+
+In preparation of creating our first snapshot of the local repository and begin tracking the `hello.r` file, we can stage our file to be committed using the `git add` command. Just to recap, staging is a process to tell Git what file(s) we want to commit.
+
+```{r, eval=F}
+git add hello.r
+```
+
+Using the `git status` command, we will see that we have now marked the `hello.r` file to be included in our first commit.
+
+```{r, eval=F}
+git status
+
+> On branch master
+
+> No commits yet
+
+> Changes to be committed:
+>   (use "git rm --cached <file>..." to unstage)
+>      new file:   hello.r
+```
+
+```{r, echo=F, out.width="80%", fig.cap="git add", out.extra='style="border: 0px;"', fig.align="center"}
+
+knitr::include_graphics(path="./figs/workflow/workflow_p2.png")
+                       
+```
+
+---
+
+#### `git commit`
+
+---
+
+We are now ready to take our first snapchat of our `git` repo. We do this using the `git commit` command followed by a commit message. It is important to create human readable and informative commit messages. As a resource, see the [Commit Message Guide](https://github.com/RomuloOliveira/commit-messages-guide) for helpful templates and guidelines for writing commit messages.
+For the purpose of this tutorial, let's use the following -- somewhat unhelpful -- commit message.
+
+```{r, eval=F}
+git commit -m "added hello.r file"
+
+> [master (root-commit) 33e020c] added hello.r file
+>  1 file changed, 1 insertion(+)
+>  create mode 100644 hello.r
+
+```
+
+```{r, echo=F, out.width="80%", fig.cap="git commit", out.extra='style="border: 0px;"', fig.align="center"}
+
+knitr::include_graphics(path="./figs/workflow/workflow_p3.png")
+                       
+```
+
+---
+
+#### `git log`
+
+---
+
+Now that we have built our first commit, we can check what we have constructed in our repository. While `git status` checks which branch you are on and if you have any unsaved changes, `git log` shows us the log of all previous commits on the current branch.
+
+```{r, eval=F}
+git log
+
+> commit 33e020c7b0d665505749788bfe127a2841ccd797 (HEAD -> master)
+> Author: Elan Ness-Cohn <elanness-cohn2017@u.northwestern.edu>
+> Date:   Wed Dec 1 18:01:30 2021 -0600
+```
+
+---
+
+#### `git remote`
+
+---
+
+So far, we have initialized a `git` repo, wrote a simple `.r` script, staged the script to be committed, and finally committed the script to be version controlled. All this was done locally on our computer. What we want to do now is to add these local commits to a remote repository on Bitbucket. This will serve as an remote copy of our work, which will allow for collaboration with others in the lab / function as a backup in case the local copies are deleted/lost. 
+
+To get this remote `git` repo up and running, let's add your code to an empty Bitbucket repository. If you don't yet have a Bitbucket repository, create a repository there first.
+
+1)  log into [Bitbucket](https://bitbucket.org/) and click the **+** sign that reads "create repository"
+2)  give the repo a UNIQUE name that matches the folder you created above (i.e. `helloWorld_<YOUR INITIALS>/`)
+3)  select the `Test` project folder
+4)  select `No` for both the `Include .gitignore?` and and `Include readme?` files. These files are important, but we will create them locally and add them to bitbucket later, rather than using the bitbucket defaults. 
+5)  click on the `Create repository` and then on the clone link to get the remote url info
+
+Navigate to the root directory of the repository you want to push. In this case our `helloWorld_ENC/` directory.
+Change the remote URL on your local repository to the Bitbucket repository to connect the two.
+
+```{r, eval = F}
+cd ~/Desktop/helloWorld_ENC/
+git remote add origin https://nesscoder@bitbucket.org/biocomplexity/helloworld_enc.git
+```
+
+---
+
+#### `git push`
+
+---
+
+Finally, we will use the `git push` command to push the contents of your local repository to the remote Bitbucket repo.
+
+```{r, eval = F}
+git push -u origin --all
+
+> Enumerating objects: 3, done.
+> Counting objects: 100% (3/3), done.
+> Writing objects: 100% (3/3), 251 bytes | 251.00 KiB/s, done.
+> Total 3 (delta 0), reused 0 (delta 0)
+> To https://bitbucket.org/biocomplexity/helloworld_enc.git
+>  * [new branch]      master -> master
+> Branch 'master' set up to track remote branch 'master' from 'origin'.
+```
+
+```{r, echo=F, out.width="80%", fig.cap="git push", out.extra='style="border: 0px;"', fig.align="center"}
+
+knitr::include_graphics(path="./figs/workflow/workflow_p4.png")
+                       
+```
+
+---
+
+---
+
+## Collaborative Workflow / Exploratory Independent Workflow
+
+---
+
+#### `git clone` {#clone}
+
+---
+
+Let's assume we are working collaboratively with another Braun Group Member on a project. Here we can use the `git clone` to create a local copy of the Bitbucket remote repository we created in the previous section. We will download this repo into a separate folder called `BraunGroupMember` to simulate a group member downloading our repo onto their own machine. 
+
+```{r, eval=F}
+mkdir ~/Desktop/BraunGroupMember
+cd ~/Desktop/BraunGroupMember
+
+git clone https://nesscoder@bitbucket.org/biocomplexity/helloworld_enc.git
+```
+
+
+```{r, echo=F, out.width="80%", fig.cap="git clone", out.extra='style="border: 0px;"', fig.align="center"}
+
+knitr::include_graphics(path="./figs/workflow/workflow_p5.png")
+                       
+```
+---
+
+#### `git branch`
+
+---
+
+Let's head back to our original `helloWorld_ENC` directory and begin developing our code.
+
+We'll start by create a new working branch in our repo. Creating branches are useful when working with a collaborator or when working on exploratory features to add to your code. By creating a branch and only working on this -- rather than the master branch -- you can feel free to make changes without fear of messing up the working code on the master branch. We will later see how we will merge this new branch into the master branch once we are satisfied with the edits we made. 
+
+```{r, eval=F}
+cd ~/Desktop/helloWorld_ENC
+git branch myBranch
+```
+
+We can use the `git branch` command now, to see all branches we have in our repository.
+
+```{r, eval=F}
+git branch
+> * master
+>   myBranch
+```
+
+---
+
+#### `git checkout`
+
+---
+
+You can move to the new branch you just created using the `git checkout` command. 
+Now if we run the `git branch` command, we see that we are now on the branch called `myBranch`, rather than `master`.
+
+```{r, eval=F}
+git checkout myBranch
+git branch
+>   master
+> * myBranch
+```
+
+In this case, let's pretend both lab members are editing the `hello.r` file. Note we are still on the branch called `myBranch`.
+
+Open up the `hello.r` file and change the contents from 
+```{r, eval=F}
+`print("Hello World")` to `print("Hello <Your Name>")`
+```
+
+
+Using the `git status` command, we can see we have changed the contents of `hello.r` only on the branched called `myBranch`.
+
+```{r, eval=F}
+git status
+
+On branch myBranch
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   hello.r
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+Let's now `add`, `commit` the change, and look at the log.
+Note we are using the `slog` alias that we created when configuring git. This alias shortens the log output, making it easier to quickly visualize the `git` history.
+
+```{r, eval=F}
+git add hello.r 
+git commit -m "changed Hello World to Hello Elan"
+git slog
+
+> * 7d3afd9 (HEAD -> myBranch) changed Hello World to Hello Elan [2021-12-01]
+> * 33e020c (origin/master, master) added hello.r file [2021-12-01]
+```
+
+```{r, echo=F, out.width="80%", fig.cap="git branch", out.extra='style="border: 0px;"', fig.align="center"}
+
+knitr::include_graphics(path="./figs/workflow/workflow_p6.png")
+                       
+```
+
+---
+
+#### `git merge`
+
+---
+
+Once we are satisfied with the exploratory work on `myBranch`, we may want to merge it into the master branch. This is done using the `git merge` command.
+Here we checkout the master branch, and merge `myBranch` into it. Finally, we push the merged master branch to the remote repo on Bitbucket.
+
+```{r, eval=F}
+git checkout master 
+git merge myBranch 
+git push
+
+git slog
+> * 7d3afd9 (HEAD -> master, origin/master, myBranch) changed Hello World to Hello Elan [2021-12-01]
+> * 33e020c added hello.r file [2021-12-01]
+
+```
+
+
+```{r, echo=F, out.width="80%", fig.cap="git merge", out.extra='style="border: 0px;"', fig.align="center"}
+
+knitr::include_graphics(path="./figs/workflow/workflow_p7.png")
+                       
+```
+
+
+Now let's pretend we are a different lab member working on the same project. Since we [cloned](#clone) the Bitbucket repo in the previous section, our repository does not have the changes we just made -- something typical of two people collaborating on the same code. 
+
+Let's again create a branch to simulate this other lab member working on an exploratory function they wish to add to the project.
+
+```{r, eval=F}
+cd ~/Desktop/BraunGroupMember/helloworld_enc
+git branch BraunGroupMember
+git branch
+>   BraunGroupMember
+> * master
+```
+
+```{r, eval=F}
+git checkout BraunGroupMember
+git branch
+> * BraunGroupMember
+>   master
+```
+
+This lab member also was working on the `hello.r` file, but made a different change to the `print("Hello World")`. Open the `hello.r` file and change 
+
+```{r, eval=F}
+`print("Hello World")` to `print("Hello BraunGroupMember")`
+```
+
+Let's again `add`, `commit` the change, and look at the log.
+
+```{r, eval=F}
+git add hello.r 
+git commit -m "changed Hello World to Hello BraunGroupMember"
+git slog
+
+> * dac0d24 (HEAD -> BraunGroupMember) changed Hello World to Hello BraunGroupMember [2021-12-01]
+> * 33e020c (origin/master, origin/HEAD, master) added hello.r file [2021-12-01]
+```
+
+
+```{r, echo=F, out.width="80%", fig.cap="git branch", out.extra='style="border: 0px;"', fig.align="center"}
+
+knitr::include_graphics(path="./figs/workflow/workflow_p8.png")
+                       
+```
+
+---
+
+#### `git fetch`
+
+---
+
+Knowing we were working collaboratively on a project, we may wish to check if our collaborator has made changes to the code.
+We can fetch the changes our collaborators have pushed to the Bitbucket repo using the `git fetch` command. 
+
+```{r, eval=F}
+git fetch
+
+> remote: Enumerating objects: 5, done.
+> remote: Counting objects: 100% (5/5), done.
+> remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+> Unpacking objects: 100% (3/3), done.
+> From https://bitbucket.org/biocomplexity/helloworld_enc
+>    33e020c..7d3afd9  master     -> origin/master
+```
+
+You'll notice at this point, that we have now created a fork in the commit history. Since the `myBranch` branch and the `BraunGroupMember` branch originated from the same root node, but added different functionalities. 
+
+```{r, eval=F}
+git slog
+
+> * dac0d24 (HEAD -> BraunGroupMember) changed Hello World to Hello BraunGroupMember [2021-12-01]
+> | * 7d3afd9 (origin/master, origin/HEAD) changed Hello World to Hello Elan [2021-12-01]
+> |/  
+> * 33e020c (master) added hello.r file [2021-12-01]
+```
+
+
+```{r, echo=F, out.width="80%", fig.cap="git fetch", out.extra='style="border: 0px;"', fig.align="center"}
+
+knitr::include_graphics(path="./figs/workflow/workflow_p9.png")
+                       
+```
+
+---
+
+#### `git pull`
+
+---
+
+Regardless, let's pull the changes made by our collaborator, so that are master branch is up to date.
+The `git pull` command can be thought of as fetching and merging the remote branch with the one we are on. In this case we are fetching and merging the master branch. Note the change in the position of `master` from the previous `slog` -- i.e. master is now at `7d3afd9` instead of `33e020c`.
+
+```{r, eval=F}
+git checkout master
+git pull
+git slog
+
+> * dac0d24 (BraunGroupMember) changed Hello World to Hello BraunGroupMember [2021-12-01]
+> | * 7d3afd9 (HEAD -> master, origin/master, origin/HEAD) changed Hello World to Hello Elan [2021-12-01]
+> |/  
+> * 33e020c added hello.r file [2021-12-01]
+```
+
+
+```{r, echo=F, out.width="80%", fig.cap="git pull", out.extra='style="border: 0px;"', fig.align="center"}
+
+knitr::include_graphics(path="./figs/workflow/workflow_p10.png")
+                       
+```
+
+---
+
+#### Dealing With Merge Conflicts
+
+---
+
+Given we are working collaboratively, we now want to merge the updated master branch with our own `BraunGroupMember` branch.
+Unfortunately, when we try and merge the `BraunGroupMember` branch into master; we see there is a merge conflict.
+
+```{r, eval=F}
+git merge BraunGroupMember 
+
+> Auto-merging hello.r
+> CONFLICT (content): Merge conflict in hello.r
+> Automatic merge failed; fix conflicts and then commit the result.
+```
+
+```{r, echo=F, out.width="80%", fig.cap="Merge conflicts", out.extra='style="border: 0px;"', fig.align="center"}
+
+knitr::include_graphics(path="./figs/workflow/workflow_p11.png")
+                       
+```
+
+Opening up the `hello.r` file, we can see where the conflict occurred.
+
+```{r, eval=F}
+nano hello.r
+```
+
+In this case, both branches changed the same lines of code, and `git` is not sure which line is correct.
+
+```{r, eval=F}
+<<<<<<< HEAD
+print("Hello Elan")
+=======
+print("Hello BraunGroupMember")
+>>>>>>> BraunGroupMember
+```
+
+To resolve the conflict, we must manually change the code. The solution in this case might look something like this.
+
+```{r, eval=F}
+print("Hello Elan and BraunGroupMember")
+```
+
+After resolving the conflict we must re-add the file with the merge conflict and continue the merge.
+
+```{r, eval=F}
+git add hello.r
+git merge --continue
+```
+
+This will open the `vi` editor to add a commit message, such as `resolved conflict between master and 'BraunGroupMember' branch`.
+When you are done adding the commit message, hit the `ESC` button, then type `:x` to save and quit.
+
+Finally, looking at the `slog` we see we have successfully merged the conflicting branches.
+
+```{r, eval=F}
+git push
+git slog
+
+> *   aae958a (HEAD -> master, origin/master, origin/HEAD) resolved conflict between master and 'BraunGroupMember' branch [2021-12-01]
+> |\  
+> | * dac0d24 (BraunGroupMember) changed Hello World to Hello BraunGroupMember [2021-12-01]
+> * | 7d3afd9 changed Hello World to Hello Elan [2021-12-01]
+> |/  
+> * 33e020c added hello.r file [2021-12-01]
+```
+
+```{r, echo=F, out.width="80%", fig.cap="Resolve merge conflicts", out.extra='style="border: 0px;"', fig.align="center"}
+
+knitr::include_graphics(path="./figs/workflow/workflow_p12.png")
+                       
+```
+
+If we go back to our original repository (`~/Desktop/helloWorld_ENC`), we can bring this local repository up-to-date using the `git pull` command.
+Note the only difference between the two `slogs` is the above has a tag for the locally created (BraunGroupMember) branch, while the bottom has a tag for the locally created (myBranch) branch.
+
+```{r, eval=F}
+cd ~/Desktop/helloWorld_ENC
+git pull
+> remote: Enumerating objects: 10, done.
+> remote: Counting objects: 100% (10/10), done.
+> remote: Compressing objects: 100% (2/2), done.
+> remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
+> Unpacking objects: 100% (6/6), done.
+> From https://bitbucket.org/biocomplexity/helloworld_enc
+>    7d3afd9..aae958a  master     -> origin/master
+> Updating 7d3afd9..aae958a
+> Fast-forward
+>  hello.r | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+git slog
+> *   aae958a (HEAD -> master, origin/master) resolved conflict between master and 'BraunGroupMember' branch [2021-12-01]
+> |\  
+> | * dac0d24 changed Hello World to Hello BraunGroupMember [2021-12-01]
+> * | 7d3afd9 (myBranch) changed Hello World to Hello Elan [2021-12-01]
+> |/  
+> * 33e020c added hello.r file [2021-12-01]
+```
+
+```{r, echo=F, out.width="80%", fig.cap="git pull", out.extra='style="border: 0px;"', fig.align="center"}
+
+knitr::include_graphics(path="./figs/workflow/workflow_p13.png")
+                       
+```
+
+---
+
+---
+
+## Helpful Tips and Tricks
+
+---
+
+#### .gitignore
+
+---
+
+Often, you’ll have a class of files that you don’t want `git` to automatically add or even show you as being untracked. These are generally automatically generated files such as log files or files produced by your build system. In such cases, you can create a `.gitignore` file listing patterns to match and ignore.
+
+```{r, eval=F}
+nano .gitignore
+```
+
+```{r, eval=F}
+#Some examples that are by no means exhaustive 
+
+# this structure is useful if you would like to ignore the contents of an entire directory/folder.
+presentations/*
+results/plots/*
+
+# Log files
+*.log
+
+# pdf files
+*.pdf
+
+# image files
+*.png
+*.jpeg
+
+# Generated by MacOS
+.DS_Store
+
+# Large media files
+*.mp4
+*.tiff
+*.avi
+*.flv
+*.mov
+*.wmv
+
+```
+
+See the [ProGit Manual](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring) for more information and suggestions on creating your `.gitignore` file.
+
+---
+
+---
+
+# Part 2: Microsoft Visual Studio Code GUI Demonstration
+
+In part two of this tutorial, participants will be exposed to the Microsoft Visual Studio Code GUI for an alternative way to interact with `git`.
+
+Checkout the [**Part 2 Video Recording**](https://urldefense.com/v3/__https://northwestern.zoom.us/rec/share/7-OSZp9NCohuG1NahlR8qq3KrGjs3RnmzxERPXLYF9Q0RDC19kLPY7sUqkJO6uO8.DhHOu_2Cuv7Es9_H__;!!Dq0X2DkFhyF93HkjWTBQKhk!FjkNqmr1kcO8EX_XE3hqvJTLQUa4dk-E6EIfXuQqpBdvHZ_Yr6n8uRyBrK0ShTNVAKIeI_X7K0_I1IW8IA$) from December 20th, 2021 below:
+
+```{r, echo=F, out.width="100%", fig.cap="**Part 1 Video Recording**", out.extra='style="border: 0px;"'}
+
+image_link <- function(image,url,...){
+  htmltools::a(
+    href=url,
+    htmltools::img(src=image,...)
+    )
+}
+
+image_link("./figs/part2VideoRec.png", url = " https://urldefense.com/v3/__https://northwestern.zoom.us/rec/share/7-OSZp9NCohuG1NahlR8qq3KrGjs3RnmzxERPXLYF9Q0RDC19kLPY7sUqkJO6uO8.DhHOu_2Cuv7Es9_H__;!!Dq0X2DkFhyF93HkjWTBQKhk!FjkNqmr1kcO8EX_XE3hqvJTLQUa4dk-E6EIfXuQqpBdvHZ_Yr6n8uRyBrK0ShTNVAKIeI_X7K0_I1IW8IA$ ")
+                       
+```
+
+
+---
+
+## Installation of Microsoft VScode and Bitbucket Extension
+
+---
+
+Installation of Microsoft VScode can be found here (https://visualstudio.microsoft.com/downloads/). It supports Window/Mac OS/Linux.
+
+Note that it is the blue *Visual Studio Code* that we want, not the purple *Visual Studio*. VScode itself is a light-weighted source code editor, but with various extensions installed it can let you run codes from multiple programming languages (C/C++,python,java,matlab,r,ampl etc.). Git is also embedded in it. 
+
+Here's how my VScode looks like on Windows. Our next objective is to install the Bitbucket Extension; once successful, you would have the two icons marked in red rectangles. The instructions of installing Bitbucket Extension can be found here (https://support.atlassian.com/bitbucket-cloud/docs/get-started-with-vs-code/). 
+
+```{r, echo=F, out.width="100%", fig.cap="**Microsoft VScode Startup Page**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/vscode/vscode_welcome.png")
+                       
+```
+
+In short, on the left panel, click 'Extensions', search for *Jira and Bitbucket (Atlassian Labs)*. You should have a blue icon of *install* instead of *uninstall*, and just install it.
+
+```{r, echo=F, out.width="100%", fig.cap="**Installation of Bitbucket Extension**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/vscode/vscode_bitbucket_p1.png")
+                       
+```
+
+After installation, navigate to the *Atlassian Settings* page and login to Bitbucket. You can get to this page by either 1) **click the bottom left bitbucket icon marked in red**, or 2) **use F1 (keyboard shortcut for *Show Command Palette*) and search for *Atlassian Settings* **.
+
+```{r, echo=F, out.width="100%", fig.cap="**Login to Bitbucket**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/vscode/vscode_bitbucket_p2.png")
+                       
+```
+
+---
+
+## Get Started With VScode
+
+---
+
+The power of VScode is indeed an integrated environment during your work. There are graphic interfaces that are easy to operate with, but at the same time, if you are unsure how to navigate to them, *you can always use the command lines!*
+
+For the remaining illustrations, I will be working on the git tutorial folder in Bitbucket. For the first time you may clone it with command lines, or if you may notice, you can also click *Clone Repository* button. You will then be prompted to enter the URL and choose the destination. 
+
+```{r, echo=F, out.width="100%", fig.cap="**Clone Repos**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/vscode/vscode_clone.png")
+                       
+```
+
+This is how the interface looks like when I open this folder. We'll talk about source controls later. Just notice here that you can always use the terminal for commands.
+
+```{r, echo=F, out.width="100%", fig.cap="**Folder Interface**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/vscode/vscode_folder_interface.png")
+                       
+```
+
+---
+
+## Visualization of Your Repo
+
+---
+
+Here is the view of the repo when I was editing the gitTutorial Rmarkdown. You can always open a file by double-clicking it in the left panel. It is not necessary that you do all works in VScode;
+you can create and edit files in your own file explorer, but VScode will always display latest changes simultaneously.
+
+```{r, echo=F, out.width="100%", fig.cap="**Repository Visualization**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/vscode/vscode_repo_visualization.png")
+                       
+```
+
+VScode has real-time markers that indicate any newly-made (uncommitted) changes. For example, I have uncommitted changes in the Rmarkdown file, and next to line numbers you can see a green stripe. This indicates that new lines are added to the current file. Although not shown here, other kinds of markers include *red triangle* (deleted contents) and *blue stripes* (modified contents).
+
+VScode also provides visualization of overall uncommitted changes in the repo, as you can see on the left panel. This is extremely powerful when many files have been changed.
+
+-   A *green dot* next to a *folder* means that this folder contains *emphasized item*: there might be untracked files, or changes that haven't been committed. 
+
+Markers below can be seen when you navigate to both *Explorer* and *Source Control* panel.
+
+-   A *green U* next to a *file* means that this file is untracked.
+-   A *Khaki M* next to a *file* means that this file has been modified.
+-   A *red D* next to a *file* means that this file has been removed.
+
+---
+
+## Source Control
+
+---
+
+#### `Commit Changes`
+
+---
+
+Now we have left the *Explorer* panel. Here we have the *Source Control* panel, and this is where git is embedded in VScode. In this panel only the uncommitted changes are shown. For every file there's a *go back* icon to *discard this change* and a *plus* icon to stage this change. We can also open files in this panel instead of the *Explorer* panel. In this time VScode will display two versions of file simultaneously, one before the change and one after the change.
+
+```{r, echo=F, out.width="100%", fig.cap="**Commit Changes, Step 1**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/vscode/vscode_commit_p1.png")
+                       
+```
+
+Here, if I decide just to include the change made in *gitTutorial.Rmd* in the next commit, I would click the *plus* icon next to this file. Here's how VScode will look like:
+
+```{r, echo=F, out.width="100%", fig.cap="**Commit Changes, Step 2**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/vscode/vscode_commit_p2.png")
+                       
+```
+
+Now this file will be put under *Staged Changes* in the left panel. You can always undo this stage command by clicking the *minus* icon next to this file. On the top of left panel there's place for you to enter the commit message, and this commit will be executed once you click the *check*.
+
+Okay I've commit the change. In the figure below, if you see the log, my commit message is *Error!* because that's an error and I want to undo the commit. VScode let you do this simply by navigating to the icon **`...`/Commit/Undo Last Commit**.
+
+```{r, echo=F, out.width="100%", fig.cap="**Undo Last Commit**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/vscode/vscode_commit_p3.png")
+                       
+```
+
+And here is how it looks after *Undo Last Commit*. This commit will not show up in the log; HEAD and master get back to where they were; you get back your commit message and the change has been staged but not committed. In short, you get back to the time before clicking the *check*.
+
+
+```{r, echo=F, out.width="100%", fig.cap="**Undo Last Commit, Result**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/vscode/vscode_commit_p4.png")
+                       
+```
+
+---
+
+#### `Manage Branches`
+
+---
+
+Branches are also easy to handle. There are two ways to manage them. The simplest one is to click the the bottom left tag with current branch name. But you can only create new branches or checkout to an existing branch.
+
+```{r, echo=F, out.width="100%", fig.cap="**Manage Branches, 1st Method**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/vscode/vscode_branch_p1.png")
+                       
+```
+
+The other way is to use our powerful **`...`**. We can use **`...`/Checkout to...** to check out to an existing branch or use **`...`/Branch** to create/merge/publish branch etc.. Here I won't illustrate their uses in detail; you would find them easy to use once you get there.
+
+```{r, echo=F, out.width="100%", fig.cap="**Manage Branches, 2nd Method**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/vscode/vscode_branch_p2.png")
+                       
+```
+
+---
+
+#### `Interact with Remote`
+
+---
+
+Doing fetch/pull/push can also be done by navigating to **`...`**. They are under **`...`/Pull,Push** and you also get to choose which remote you want to interact with, if there are multiple remotes. 
+
+```{r, echo=F, out.width="100%", fig.cap="**Fetch/Pull/Push**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/vscode/vscode_remote_p1.png")
+                       
+```
+
+Note that there is another command *Sync* under **`...`/Pull,Push**, and a shortcut to it is the bottom left sync button. It stands for *pull from the remote, and then push to it*. Many times I found this shortcut to be useful.
+
+```{r, echo=F, out.width="100%", fig.cap="**Sync Button**", out.extra='style="border: 0px;"'}
+
+knitr::include_graphics(path="./figs/vscode/vscode_remote_p2.png")
+                       
+```
+
+---
+
+## Other Version Control Extensions in VScode
+
+---
+
+Till here we have covered basic GUIs to use git in VScode. There are many other source control providers having their extensions available, and you can explore them yourself through this document (https://code.visualstudio.com/docs/editor/versioncontrol).
+
+---
+
+---
+
+# Additional Links and Sources
+
+- [biocomplexity/anexampleproject/](https://bitbucket.org/biocomplexity/anexampleproject/src/master/)- Example project for how to organize the directories in your repo.
+
+- [Intermediate Git Video Tutorial - Setting up your workflow](https://www.youtube.com/watch?v=Uszj_k0DGsg&ab_channel=freeCodeCamp.org)
+
+- [GitPro Book](https://git-scm.com/book/en/v2)
+
+- [MIT: The Missing Semester Git Tutorial](https://missing.csail.mit.edu/)
+
+- [Microsoft Visual Studio Code GUI](https://code.visualstudio.com/)
+
+- [Other git GUI-Clients](https://git-scm.com/downloads/guis)
